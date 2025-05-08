@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
+<style>
+    table,td,th{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    td,th{
+        padding: 10px 20px;
+    }
+</style>
+
+
+
 <body>
     <?php
         include_once("config.php")
