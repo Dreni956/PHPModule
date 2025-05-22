@@ -1,19 +1,39 @@
 <?php
-    include_once("config.php");
+    require "config.php";
 
-    if(isset($_POST["sumbit"])){
-        $name = $_POST["name"];
-        $surname = $_POST["surname"];
-        $username = $_POST["username"];
-        $email = $_POST["email"];
-        $tempPASS = $_POST["passowrd"];
-        $password = password_hash($temPass, PASSWORD_DEFAULT);
+    if(isset($_POST['submit'])){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
+        if(empty($username)) || empty($password){
+            echo"Fill all of the fields!";
+            header("refresh:2; url=login.php");
+        }
+        else{
+            $sql = "SELECT * FROM users WHERE username=:usernaame";      
+            $insertSQL = $conn -> prepare($sql);
+            $insertSQL ->bindParam(':username', $username);
+            $insertSQL ->execute();
 
-        if(empty($name) || empty($surname) || empty($username) || empty($email) || empty($password)){
-            echo "You need to fill all of the fields"
+            if($insertSQL ->rowCount() >0){
+                $data = $insertSQL -> fetch();
+                if(password_verify($password,$data['password'])){
+                    $_SESSION['username'] = $data['username'];
+                }
+                else{
+                    echo"Username or Password incorrect";
+                    header("refresh:2; url=login.php");
+                }
+            }
+            else{
+                echo"user is not found";
+            }
+
         }
     }
+
+
+
 
 
 ?>
