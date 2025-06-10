@@ -1,8 +1,6 @@
 <?php 
-
-
 require 'config.php';
-
+session_start();
 
 if(isset($_POST['submit']))
 {
@@ -25,17 +23,16 @@ if(isset($_POST['submit']))
     if($insertSql->rowCount() > 0) {
         $data=$insertSql->fetch();
         if(password_verify($password,$data['password'])){
-          $_SESSION['username']=$data['username'];
+          $_SESSION['username']= $data['username'];
           echo "Perhajr Bajrami!";
-          // header("Location: dashboards.php");
+          // header("Location: ../dashboard.php");
         }else{
           echo "Password incorrect";
-          header( "refresh:2; url=login.php" );
+          header( "refresh:2; url=../login.php" );
         }
     } else {
         echo "User not found!!";
     }
   }
 }
-
 

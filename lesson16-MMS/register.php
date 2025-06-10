@@ -11,7 +11,7 @@
 		$tempPass = $_POST['password'];
 		$password = password_hash($tempPass, PASSWORD_DEFAULT);
 
-		if(empty($name) || empty($username) ||  empty($email) || empty($password))
+		if(empty($name) || empty($username) || empty($email) || empty($password))
 		{
 			echo "You need to fill all the fields.";
 		}
@@ -26,15 +26,15 @@
 			if($tempSQL->rowCount() > 0)
 			{
 				echo "Username exists!";
-				header( "refresh:2; url=signup.php" ); 
+				header( "refresh:2; url=index.php" ); 
 			}
 			else
 			{
-				$sql = "insert into users (name,username,email, password) values (:name,:username,:email, :password)";
+				$sql = "insert into users (name, username, email, password) values (:name, :username, :email, :password)";
 				$insertSql = $conn->prepare($sql);
 			
 				$insertSql->bindParam(':name', $name); 
-                $insertSql->bindParam(':username', $username); 
+				$insertSql->bindParam(':username', $username);
 				$insertSql->bindParam(':email', $email);
 				$insertSql->bindParam(':password', $password);
 

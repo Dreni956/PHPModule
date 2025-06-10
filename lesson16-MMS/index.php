@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,6 @@
     <link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
     <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
     <style>
-
 
         html,
     body {
@@ -72,7 +71,7 @@
 
     <div class="form-floating">
       <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="name">
-      <label for="floatingInput">Emri</label>
+      <label for="floatingInput">Name</label>
     </div>
     <div class="form-floating">
       <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">

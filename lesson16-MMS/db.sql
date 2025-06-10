@@ -52,7 +52,6 @@ CREATE TABLE `bookings` (
 INSERT INTO `bookings` (`id`, `user_id`, `movie_id`, `nr_tickets`, `date`, `is_approved`, `time`) VALUES
 (3, 2, 1, 2, '2022-12-16', 'true', '19:00');
 
-
 CREATE TABLE `movies` (
   `id` int(255) NOT NULL,
   `movie_name` varchar(255) NOT NULL,
@@ -81,7 +80,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `confirm_password` varchar(255) NOT NULL,
   `is_admin` varchar(255) NOT NULL
-); ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 --
@@ -93,23 +92,6 @@ INSERT INTO `users` (`id`, `emri`, `username`, `email`, `password`, `confirm_pas
 (1, 'Arlinda', 'arlinda', 'arlindaosmani00@gmail.com', 'arlinda', '$2y$10$0VBVvKNyxIl9OA00/FRmrep7atIIE/SoLXGEoXcjNmF.4ZV6b3NIG', 'true'),
 (2, 'iljas', 'iljas', 'iljas@iljas.com', '$2y$10$erk7uFn0RpqhC6g3VX.XcuyU3CVkOanelghahzqjmdtxeFwfEgQQO', '$2y$10$2XuH6X04NLc/jwMhciX8OOccIfFHom7oi6o2PSh82Z8BnINw.nu2O', ''),
 (3, 'linda', 'linda', 'linda@linda.com', '$2y$10$pzATPYrl/LDDmFp8DIxalOrvUNT2RL4.I3pFbRjGrsUE8L/xH9O32', '$2y$10$q.HH1oolBta2lTtF/uCIGu2lwLhoHvKoWljOfqV1TAB5ER44EAQUG', 'true');
-
-ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`id`);
-
-
---
--- Indexes for table `movies`
---
-ALTER TABLE `movies`
-  ADD PRIMARY KEY (`id`);
-
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `bookings`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
@@ -128,4 +110,22 @@ ALTER TABLE `movies`
 ALTER TABLE `users`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
+
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`);
+
+
+--
+-- Indexes for table `movies`
+--
+ALTER TABLE `movies`
+  ADD PRIMARY KEY (`id`);
+
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
 
