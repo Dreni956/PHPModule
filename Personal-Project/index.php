@@ -1,4 +1,21 @@
-<?php include 'db.php'; ?>
+<?php
+session_start();
+
+// Kontrollo nëse përdoruesi është i kyçur
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+
+include 'db.php';
+
+// Marrim të gjitha ushqimet
+$sql = "SELECT * FROM foods ORDER BY date_added DESC";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+
+$totalCalories = 0;
+?>
 
 <!DOCTYPE html>
 <html>
@@ -8,11 +25,17 @@
 </head>
 <body>
 <div class="container">
+
+    <p>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></p>
+
     <h1>Diet Tracker</h1>
 
     <form action="add_food.php" method="POST">
         <input type="text" name="food_name" placeholder="Food name" required>
         <input type="number" name="calories" placeholder="Calories" required>
+        <label>
+            <input type="checkbox" name="recommended" value="1"> Recommended
+        </label>
         <button type="submit">Add Food</button>
     </form>
 
@@ -26,18 +49,14 @@
         </tr>
 
         <?php
-        $sql = "SELECT * FROM foods ORDER BY date_added DESC";
-        $result = $conn->query($sql);
-        $totalCalories = 0;
-
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>
-                    <td>{$row['food_name']}</td>
-                    <td>{$row['calories']}</td>
-                    <td>{$row['date_added']}</td>
+                    <td>" . htmlspecialchars($row['food_name']) . "</td>
+                    <td>" . htmlspecialchars($row['calories']) . "</td>
+                    <td>" . htmlspecialchars($row['date_added']) . "</td>
                     <td>
                         <form action='delete_food.php' method='POST' onsubmit='return confirm(\"Are you sure?\")'>
-                            <input type='hidden' name='id' value='{$row['id']}'>
+                            <input type='hidden' name='id' value='" . htmlspecialchars($row['id']) . "'>
                             <button type='submit'>Delete</button>
                         </form>
                     </td>
