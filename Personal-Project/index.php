@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Kontrollo nëse përdoruesi është i kyçur
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit;
@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
 
 include 'db.php';
 
-// Marrim të gjitha ushqimet
+
 $sql = "SELECT * FROM foods ORDER BY date_added DESC";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -67,6 +67,17 @@ $totalCalories = 0;
     </table>
 
     <h3>Total Calories: <?php echo $totalCalories; ?></h3>
+
+    <a href="admin_login.php">
+    <button class="admin-btn">Go to Admin Panel</button>
+</a>
+
+
 </div>
+
+</div>
+
+
+
 </body>
 </html>
